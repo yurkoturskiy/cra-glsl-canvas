@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import raw from "raw.macro";
+import "./App.css";
+import ShaderCanvas from "@signal-noise/react-shader-canvas";
 
 function App() {
+  const shader = raw("./shader.frag");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ShaderCanvas
+        width={window.innerWidth}
+        height={window.innerHeight}
+        fragShader={shader}
+      />
     </div>
   );
 }
