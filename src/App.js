@@ -1,7 +1,7 @@
+import { styled } from "@stitches/react";
 import raw from "raw.macro";
 import "./App.css";
 import ShaderCanvas from "@signal-noise/react-shader-canvas";
-import { useState } from "react";
 const glsl = (shader) => shader[0];
 
 const third = glsl`
@@ -35,25 +35,34 @@ void main() {
 }
 `;
 
-function App() {
-  const [shader, setShader] = useState(raw("./shader/first.frag"));
+const ShadersWrapper = styled("div", {
+  display: "flex",
+  padding: "12px",
+});
+const Card = styled("div", {
+  backgroundColor: "white",
+  borderRadius: "2px",
+  width: "320px",
+  overflow: "hidden",
+  height: "320px",
+  border: "1px solid lightgrey",
+  margin: "12px",
+});
 
-  return (
-    <div>
-      <button onClick={() => setShader(raw("./shader/first.frag"))}>
-        first
-      </button>
-      <button onClick={() => setShader(raw("./shader/second.frag"))}>
-        second
-      </button>
-      <button onClick={() => setShader(third)}>third</button>
-      <ShaderCanvas
-        width={window.innerWidth}
-        height={window.innerHeight}
-        fragShader={shader}
-      />
-    </div>
-  );
+const shaders = [
+  raw("./shader/first.frag"),
+  raw("./shader/second.frag"),
+  third,
+];
+
+function App() {
+  const cards = shaders.map((shader, index) => (
+    <Card>
+      <ShaderCanvas width="320" height="320" fragShader={shader} />
+    </Card>
+  ));
+
+  return <ShadersWrapper>{cards}</ShadersWrapper>;
 }
 
 export default App;
