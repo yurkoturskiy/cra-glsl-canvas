@@ -4,7 +4,7 @@ import third from "./003";
 import fourth from "./004";
 import generateID from "../utils/generateID";
 
-export default [
+const shaders = [
   {
     id: generateID("sha"),
     frag: first,
@@ -24,3 +24,5 @@ export default [
 ];
 
 export const getShader = (id) => shaders.find((sh) => sh.id === id);
+
+export default shaders;
