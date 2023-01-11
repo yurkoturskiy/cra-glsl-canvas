@@ -1,14 +1,9 @@
-import { Shaders, Node, GLSL } from "gl-react";
+import { Shaders, Node } from "gl-react";
+import first from "../shaders/004";
 
 const shaders = Shaders.create({
   helloBlue: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform float blue;
-      void main() {
-        gl_FragColor = vec4(uv.x, uv.y, blue, 1.0);
-      }`,
+    frag: first,
   },
 });
 
